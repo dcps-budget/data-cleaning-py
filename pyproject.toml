@@ -1,0 +1,18 @@
+[project]
+name = "data-cleaning-py"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "openpyxl>=3.1.5",
+    "pandas>=2.3.1",
+    "ruff>=0.12.2",
+]
+
+[project.scripts]
+data-cleaning-py = "data_cleaning_py:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
