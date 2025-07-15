@@ -8,10 +8,10 @@ Steps:
 
 `scripts/activate`
 
-1. Install from GitHub.
+2. Install from GitHub.
 
 `pip install git+https://github.com/dcps-budget/data-cleaning-py.git`
 
-1. Run command line utility, which will be installed as part of the package.
+3. Run command line utility, which will be installed as part of the package.
 
 `data-cleaning-py`
