@@ -1,7 +1,7 @@
 import os
 
 
-def path_budget():
+def path_budget() -> str:
     return os.path.join(
         "C:",
         os.sep,
@@ -13,9 +13,9 @@ def path_budget():
     )
 
 
-def path_025():
+def path_025() -> str:
     return os.path.join(path_budget(), "R025")
 
 
-def path_209():
+def path_209() -> str:
     return os.path.join(path_budget(), "R209")

@@ -1,17 +1,16 @@
 import os
 import pandas as pd
 
-from datetime import datetime
-from data_cleaning_py import paths, clean_209
+from data_cleaning_py import paths
 
 
-def clean_025(year_fiscal: str) -> pd.DataFrame:
+def clean_025(year_fiscal: str, projects: pd.DataFrame) -> pd.DataFrame:
     path_025_in = os.path.join(paths.path_025(), "Raw", year_fiscal, "r_025.xls")
     path_025_out = os.path.join(paths.path_025(), "Clean", year_fiscal, "r_025.csv")
 
     r_025_raw = pd.read_excel(
         path_025_in,
-        usecols="A,E,Q,W,G,I,K,Y,AA,AE,AJ,AF,AG,AH",
+        usecols="A,E,G,I,K,Q,W,Y,AA,AE,AF,AG,AH,AJ",
         dtype={
             "Agency": str,
             "Fund": str,
@@ -55,7 +54,7 @@ def clean_025(year_fiscal: str) -> pd.DataFrame:
         )
         .loc[
             lambda df: (df["agency_id"].isin(["GA0"]))
-            | (df["project_id"].isin(clean_209.clean_209(year_fiscal)["project_id"])),
+            | (df["project_id"].isin(projects["project_id"])),
             [
                 "year_fiscal",
                 "agency_id",
@@ -76,6 +75,6 @@ def clean_025(year_fiscal: str) -> pd.DataFrame:
 
     r_025_clean.to_csv(path_025_out, index=False)
 
-    print("R025:", "Finished", len(r_025_clean), "\trows at", datetime.now())
+    print("Processed", len(r_025_clean), "records from", "R025")
 
     return r_025_clean

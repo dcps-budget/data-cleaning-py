@@ -19,4 +19,5 @@ def get_config(envs_expected: list[str]) -> dict[str, str]:
             sys.exit(f"Environment variable {env} is missing from .env file.")
         else:
             config[env] = str(os.getenv(env))
+
     return config

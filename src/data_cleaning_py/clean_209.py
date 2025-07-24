@@ -1,7 +1,6 @@
 import os
 import pandas as pd
 
-from datetime import datetime
 from data_cleaning_py import paths
 
 
@@ -38,6 +37,6 @@ def clean_209(year_fiscal: str) -> pd.DataFrame:
 
     r_209_clean.to_csv(path_209_out, index=False)
 
-    print("R209:", "Finished", len(r_209_clean), "\trows at", datetime.now())
+    print("Processed", len(r_209_clean), "records from", "R209")
 
     return r_209_clean
