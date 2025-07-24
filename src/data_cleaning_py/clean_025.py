@@ -5,11 +5,9 @@ from datetime import datetime
 from data_cleaning_py import paths, clean_209
 
 
-def clean_025() -> pd.DataFrame:
-    fy = 2025
-
-    path_025_in = os.path.join(paths.path_025(), "Raw", str(fy), "r_025.xls")
-    path_025_out = os.path.join(paths.path_025(), "Clean", str(fy), "r_025.csv")
+def clean_025(year_fiscal: str) -> pd.DataFrame:
+    path_025_in = os.path.join(paths.path_025(), "Raw", year_fiscal, "r_025.xls")
+    path_025_out = os.path.join(paths.path_025(), "Clean", year_fiscal, "r_025.csv")
 
     r_025_raw = pd.read_excel(
         path_025_in,
@@ -50,14 +48,14 @@ def clean_025() -> pd.DataFrame:
             }
         )
         .assign(
-            year_fiscal=fy,
+            year_fiscal=int(year_fiscal),
             budget_spent=lambda df: df["Commitment"]
             + df["Obligation"]
             + df["Expenditure"],
         )
         .loc[
             lambda df: (df["agency_id"].isin(["GA0"]))
-            | (df["project_id"].isin(clean_209.clean_209()["project_id"])),
+            | (df["project_id"].isin(clean_209.clean_209(year_fiscal)["project_id"])),
             [
                 "year_fiscal",
                 "agency_id",

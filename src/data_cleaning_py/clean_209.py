@@ -5,11 +5,9 @@ from datetime import datetime
 from data_cleaning_py import paths
 
 
-def clean_209() -> pd.DataFrame:
-    fy = 2025
-
-    path_209_in = os.path.join(paths.path_209(), "Raw", str(fy), "r209.xlsx")
-    path_209_out = os.path.join(paths.path_209(), "Clean", str(fy), "r209.csv")
+def clean_209(year_fiscal: str) -> pd.DataFrame:
+    path_209_in = os.path.join(paths.path_209(), "Raw", year_fiscal, "r209.xlsx")
+    path_209_out = os.path.join(paths.path_209(), "Clean", year_fiscal, "r209.csv")
 
     r_209_raw = pd.read_excel(
         path_209_in,
