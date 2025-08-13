@@ -42,15 +42,13 @@ def clean_025(year_fiscal: str, projects: pd.DataFrame) -> pd.DataFrame:
                 "Account": "account_id",
                 "Project": "project_id",
                 "Award": "award_id",
-                "Total Budget": "budget_adjusted",
-                "Available Budget": "budget_current",
+                "Total Budget": "budget",
+                "Available Budget": "available",
             }
         )
         .assign(
             year_fiscal=int(year_fiscal),
-            budget_spent=lambda df: df["Commitment"]
-            + df["Obligation"]
-            + df["Expenditure"],
+            spent=lambda df: df["Commitment"] + df["Obligation"] + df["Expenditure"],
         )
         .loc[
             lambda df: (df["agency_id"].isin(["GA0"]))
@@ -66,9 +64,9 @@ def clean_025(year_fiscal: str, projects: pd.DataFrame) -> pd.DataFrame:
                 "account_id",
                 "project_id",
                 "award_id",
-                "budget_adjusted",
-                "budget_spent",
-                "budget_current",
+                "budget",
+                "spent",
+                "available",
             ],
         ]
     )

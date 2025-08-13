@@ -25,9 +25,9 @@ def balances_fields_insert() -> list[str]:
     return balances_fields_join() + [
         "account_3_id",
         "account_1_id",
-        "budget_adjusted",
-        "budget_spent",
-        "budget_current",
+        "budget",
+        "spent",
+        "available",
     ]
 
 
@@ -46,7 +46,7 @@ def balances_merge(
 
 
 def balances_missing_difs(balances: pd.DataFrame) -> pd.DataFrame:
-    missing_difs = balances.loc[lambda df: df["budget_current"].isna()]
+    missing_difs = balances.loc[lambda df: df["available"].isna()]
 
     print("Found", len(missing_difs), "records missing in DIFS")
 
